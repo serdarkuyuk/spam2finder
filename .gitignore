@@ -2,3 +2,4 @@ spam.tsv
 spamClassifierTfIDF.ipynb
 env/
 .ipynb_checkpoints
+appv2.py

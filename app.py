@@ -21,7 +21,7 @@ def main():
     file.close()
 
     if request.method == 'GET':
-        return "hello get world"
+        return mytest.predict(["hello get world"])[0]
 
     return "hellow world"
 

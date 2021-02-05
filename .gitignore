@@ -3,3 +3,4 @@ spamClassifierTfIDF.ipynb
 env/
 .ipynb_checkpoints
 appv2.py
+appv3streamlit.py

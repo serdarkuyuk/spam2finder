@@ -6,29 +6,51 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from flask import Flask, request, jsonify, render_template
+import streamlit as st
 
-app = Flask(__name__)
+file = open('pipeline.pickle', 'rb')
+
+# dump information to that file
+mytest = pickle.load(file)
+
+# close the file
+file.close()
 
 
-@app.route('/', methods=['GET', 'POST'])  # , methods=['POST'])
+def welcome():
+    return "Welcome All"
+
+
+def predictionFunction(inputText):
+    result = mytest.predict([inputText])[0]
+    return result
+
+
 def main():
-    file = open('pipeline.pickle', 'rb')
+    st.title("Spam Prediction")
+    #st.text_input("Text-Email", "Type your email here.")
+    st.header('Try this two sentence')
+    st.text('Congratulations!, you have won free tickets to the USA this summer. Text \'Won\'')
+    st.text('you have got two tickets to the USA this summer.')
 
-    # dump information to that file
-    mytest = pickle.load(file)
+    inputText = st.text_area("Text-Email", "Type your email here.")
 
-    # close the file
-    file.close()
-
-    if request.method == 'GET':
-        return mytest.predict(["hello get world"])[0]
-
-    return "hellow world"
-
+    if st.button("Predict"):
+        output = predictionFunction(inputText)
+        if output == "ham":
+            st.success('This email seems to be normal email')
+            # st.text(output)
+            #st.markdown('This email seems to be ** _normal_ email **')
+        else:
+            st.error('This email seems to be spam email')
+            # st.text(output)
+        return output
 
     # return render_template('index.html')
 if __name__ == '__main__':
-    app.run()
+    result = main()
+    # print(result)
+
 #
 # > pip freeze > requirements.txt
 #

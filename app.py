@@ -5,6 +5,7 @@ from sklearn.svm import SVC
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -19,11 +20,13 @@ def main():
     # close the file
     file.close()
 
-    print("hellow world")
     if request.method == 'GET':
-        print("hello get world")
+        return "hello get world"
 
-        # return render_template('index.html')
+    return "hellow world"
+
+
+    # return render_template('index.html')
 if __name__ == '__main__':
     app.run()
 #

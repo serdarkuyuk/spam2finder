@@ -1,10 +1,24 @@
-
+import pickle
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.pipeline import Pipeline
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 app = Flask(__name__)
 
 
 @app.route('/', methods=['GET', 'POST'])  # , methods=['POST'])
 def main():
+    file = open('pipeline.pickle', 'rb')
+
+    # dump information to that file
+    mytest = pickle.load(file)
+
+    # close the file
+    file.close()
+
     print("hellow world")
     if request.method == 'GET':
         print("hello get world")
